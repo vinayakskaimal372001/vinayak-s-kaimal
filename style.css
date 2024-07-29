@@ -1,0 +1,71 @@
+*{
+    font-family: 'Poppins',sans-serif;
+    margin:0;
+   
+}
+header{padding: 40px;
+    background: linear-gradient(to right, #831bcd, #f9620b);
+    color:rgb(252, 247, 247);
+}
+div{
+    text-align: center;
+}
+section{
+   margin:25px;
+    
+    padding: 30px;
+    box-shadow: 10px 10px 5px rgba(32, 32, 32, 0.1);
+    background-color: rgba(225, 224, 224, 0.87);
+    border-radius: 10px;
+}
+h2,h3{
+    color: #41036d;
+}
+footer{color: #fefeff;
+    padding: 25px;
+    background: linear-gradient(to right, #831bcd, #f9620b);
+}
+#skills{
+    text-align: left;
+ 
+    display: inline-block;
+ 
+}
+.round-image {
+    border-radius: 50%;
+   box-shadow: 10px 10px 5px rgba(32, 32, 32, 0.1);;
+    
+}
+#number{
+    color: #41036d;
+}
+.form{
+    margin: 20px auto;
+    max-width: 500px;
+    padding-top :40px;
+    padding-bottom :40px;
+    background: #00000018;
+    border-radius: 2%;
+     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+button{
+
+    border-radius: 10%;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    box-shadow: 10px 5px 15px rgba(0,0,0,0.1);
+    color:rgba(255, 255, 255, 0.947);
+    border:0;
+    cursor: pointer;
+     font-size: 18px;
+    background:rgba(1, 8, 103, 0.947);
+
+}
+
+.edu{
+    text-align: left;
+}
+.intership{
+    text-align: left;
+}
