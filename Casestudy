@@ -1,0 +1,200 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <ctime>
+using namespace std;
+
+// Helper function to get the current date and time
+string currentDateTime() {
+    time_t now = time(0);
+    char* dt = ctime(&now);
+    return string(dt);
+}
+
+// User class for Admin and Driver
+class User {
+public:
+    int id;
+    string name, email, password, phone, role;
+    string created_at, updated_at;
+
+    User(int uid, string uname, string uemail, string upassword, string uphone, string urole) {
+        id = uid;
+        name = uname;
+        email = uemail;
+        password = upassword;
+        phone = uphone;
+        role = urole;
+        created_at = currentDateTime();
+        updated_at = created_at;
+    }
+
+    void display() {
+        cout << "ID: " << id << ", Name: " << name << ", Role: " << role << endl;
+    }
+};
+
+// Floor class
+class Floor {
+public:
+    int id;
+    string floor_number, created_at, updated_at;
+
+    Floor(int fid, string fnum) {
+        id = fid;
+        floor_number = fnum;
+        created_at = currentDateTime();
+        updated_at = created_at;
+    }
+
+    void display() {
+        cout << "Floor ID: " << id << ", Floor Number: " << floor_number << endl;
+    }
+};
+
+// Parking Spot class
+class Spot {
+public:
+    int id, floor_id;
+    string spot_number;
+    double price_per_hour;
+    bool is_available;
+    string created_at, updated_at;
+
+    Spot(int sid, int fid, string snum, double price, bool available) {
+        id = sid;
+        floor_id = fid;
+        spot_number = snum;
+        price_per_hour = price;
+        is_available = available;
+        created_at = currentDateTime();
+        updated_at = created_at;
+    }
+
+    void display() {
+        cout << "Spot ID: " << id << ", Spot Number: " << spot_number << ", Floor ID: " << floor_id
+             << ", Price: " << price_per_hour << ", Available: " << (is_available ? "Yes" : "No") << endl;
+    }
+};
+
+// Vehicle class
+class Vehicle {
+public:
+    int id, user_id;
+    string vehicle_number, model, type, created_at;
+
+    Vehicle(int vid, int uid, string vnum, string vmodel, string vtype) {
+        id = vid;
+        user_id = uid;
+        vehicle_number = vnum;
+        model = vmodel;
+        type = vtype;
+        created_at = currentDateTime();
+    }
+
+    void display() {
+        cout << "Vehicle ID: " << id << ", Vehicle Number: " << vehicle_number << ", Model: " << model
+             << ", Type: " << type << endl;
+    }
+};
+
+// Booking class
+class Booking {
+public:
+    int id, user_id, vehicle_id, spot_id;
+    string booking_date, start_time, estimated_end_time, actual_end_time, status;
+    double price;
+
+    Booking(int bid, int uid, int vid, int sid, string bdate, string stime, string etime, double p) {
+        id = bid;
+        user_id = uid;
+        vehicle_id = vid;
+        spot_id = sid;
+        booking_date = bdate;
+        start_time = stime;
+        estimated_end_time = etime;
+        price = p;
+        status = "Parked";
+        actual_end_time = "";
+    }
+
+    void display() {
+        cout << "Booking ID: " << id << ", User ID: " << user_id << ", Vehicle ID: " << vehicle_id
+             << ", Spot ID: " << spot_id << ", Status: " << status << ", Price: " << price << endl;
+    }
+};
+
+// Payment class
+class Payment {
+public:
+    int id, booking_id, user_id;
+    string payment_date, payment_mode;
+    double amount;
+
+    Payment(int pid, int bid, int uid, double amt, string pmode) {
+        id = pid;
+        booking_id = bid;
+        user_id = uid;
+        amount = amt;
+        payment_mode = pmode;
+        payment_date = currentDateTime();
+    }
+
+    void display() {
+        cout << "Payment ID: " << id << ", Booking ID: " << booking_id << ", Amount: " << amount
+             << ", Payment Mode: " << payment_mode << endl;
+    }
+};
+
+// Main function for demonstration
+int main() {
+    // Create some data
+    vector<User> users;
+    vector<Floor> floors;
+    vector<Spot> spots;
+    vector<Vehicle> vehicles;
+    vector<Booking> bookings;
+    vector<Payment> payments;
+
+    // Adding Admin
+    users.push_back(User(1, "Admin", "admin@example.com", "admin123", "1234567890", "admin"));
+
+    // Adding a Floor
+    floors.push_back(Floor(1, "G1"));
+
+    // Adding a Parking Spot
+    spots.push_back(Spot(1, 1, "GR001", 10.0, true));
+
+    // Adding a Driver
+    users.push_back(User(2, "Driver", "driver@example.com", "driver123", "0987654321", "driver"));
+
+    // Adding a Vehicle
+    vehicles.push_back(Vehicle(1, 2, "KA01AB1234", "Sedan", "Car"));
+
+    // Creating a Booking
+    bookings.push_back(Booking(1, 2, 1, 1, currentDateTime(), "10:00 AM", "12:00 PM", 20.0));
+
+    // Adding a Payment
+    payments.push_back(Payment(1, 1, 2, 20.0, "UPI"));
+
+    // Display Data
+    cout << "Users:\n";
+    for (auto& user : users) user.display();
+
+    cout << "\nFloors:\n";
+    for (auto& floor : floors) floor.display();
+
+    cout << "\nSpots:\n";
+    for (auto& spot : spots) spot.display();
+
+    cout << "\nVehicles:\n";
+    for (auto& vehicle : vehicles) vehicle.display();
+
+    cout << "\nBookings:\n";
+    for (auto& booking : bookings) booking.display();
+
+    cout << "\nPayments:\n";
+    for (auto& payment : payments) payment.display();
+
+    return 0;
+}
