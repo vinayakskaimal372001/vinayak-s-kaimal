@@ -1,0 +1,224 @@
+
+1. Admin App Flow
+
+The admin is responsible for managing the system's core entities like users, floors, parking spots, and bookings.
+
+Admin Operations
+
+1. Login:
+Admin logs into the system using credentials.
+(In the implementation, this is assumed by creating an admin user initially).
+
+
+2. Dashboard:
+Displays options to manage users, floors, parking spots, bookings, and payments.
+
+
+3. User Management:
+Admin can:
+
+Create: Add new users (admins or drivers).
+
+Edit: Modify existing user details.
+
+Delete: Remove users from the system.
+
+Display All: View all users in the system.
+
+
+
+4. Floor Management:
+Admin can:
+
+Create: Add a new floor (e.g., "G1", "G2").
+
+Edit: Modify floor information.
+
+Delete: Remove a floor.
+
+Display All: View all floors.
+
+
+
+5. Parking Spot Management:
+Admin can:
+
+Create: Add parking spots to a specific floor (e.g., "GR001").
+
+Edit: Modify spot details like price_per_hour or is_available.
+
+Delete: Remove a spot.
+
+Display All: View all parking spots.
+
+
+
+6. Booking and Payment Reports:
+Admin can monitor:
+
+Ongoing, completed, or canceled bookings.
+
+Payment details for each booking.
+
+
+
+
+
+---
+
+2. Driver App Flow
+
+Drivers are end-users who register themselves, add their vehicles, book parking spots, and manage payments.
+
+Driver Operations
+
+1. Driver Registration:
+The driver enters:
+
+Personal Details: Name, phone, email, password.
+
+Vehicle Details: Vehicle number, model, type.
+(Saved in the users and vehicles data structures.)
+
+
+
+2. Driver Login:
+The driver logs in using their email and password.
+
+
+3. Driver Dashboard:
+After login, drivers can:
+
+Do Booking:
+a. Select a floor and spot.
+b. Enter booking start and estimated end time.
+c. Pay the price (based on price_per_hour and duration).
+d. The system marks the spot as unavailable and generates a booking record.
+
+View Bookings:
+View details of current and past bookings, including parking time, spot, and payment status.
+
+Unparking:
+a. Driver selects an active booking.
+b. System records the actual end time.
+c. Driver pays the remaining amount if applicable (e.g., exceeding estimated time).
+d. The spot is marked available.
+
+Profile Management:
+Update driver details like name, phone, and password.
+
+
+
+
+
+---
+
+3. System Components and Flow
+
+Here’s how the system flows across components:
+
+1. Users:
+Admins and drivers are stored in the users list.
+
+Admins manage the system, while drivers interact with it to book and unpark.
+
+
+
+2. Floors:
+Floors are created by admins and stored in the floors list.
+
+Each floor has multiple parking spots.
+
+
+
+3. Spots:
+Parking spots are linked to floors using floor_id.
+
+Each spot has attributes like spot_number, price_per_hour, and is_available.
+
+Availability is updated based on bookings.
+
+
+
+4. Vehicles:
+Each driver can register one or more vehicles.
+
+Vehicles are stored in the vehicles list and linked to drivers using user_id.
+
+
+
+5. Bookings:
+When a driver books a spot:
+
+A Booking object is created with details like spot_id, start_time, estimated_end_time, and price.
+
+The spot’s availability is updated.
+
+
+
+6. Payments:
+After booking or unparking, the driver makes a payment:
+
+Payment details like payment_mode and amount are stored in the payments list.
+
+
+
+
+
+---
+
+Example Flow
+
+Scenario: A Driver Books a Parking Spot
+
+1. Admin Setup:
+Admin creates:
+
+A floor "G1".
+
+A parking spot "GR001" on "G1" priced at $10/hour.
+
+
+
+2. Driver Registration:
+The driver registers with personal and vehicle details.
+
+
+3. Booking:
+
+The driver selects "G1" and spot "GR001".
+
+Enters booking details: start_time = 10:00 AM, estimated_end_time = 12:00 PM.
+
+System calculates the price: 2 hours * $10/hour = $20.
+
+Spot "GR001" is marked unavailable.
+
+A booking record is created.
+
+
+
+4. Unparking:
+
+The driver unparks at 12:30 PM.
+
+Actual parking time: 2.5 hours.
+
+Total price: $25.
+
+The driver pays $5 extra (for the additional 30 minutes).
+
+
+
+5. System Updates:
+
+Spot "GR001" is marked available again.
+
+Payment is recorded.
+
+
+
+
+
+
+
